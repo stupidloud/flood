@@ -2,7 +2,9 @@
 
 [![Flood logo](https://github.com/jesec/flood/raw/master/flood.svg)](https://flood.js.org)
 
-[![Github Actions build status badge](https://github.com/jesec/flood/workflows/Build/badge.svg?branch=master&event=push)](https://github.com/jesec/flood/actions) [![Crowdin](https://badges.crowdin.net/flood/localized.svg)](https://crowdin.com/project/flood) [![Discord server badge](https://img.shields.io/discord/418267176873623553.svg?style=flat-square)](https://discord.gg/Z7yR5Uf)
+[![Build](https://github.com/jesec/flood/actions/workflows/build.yml/badge.svg)](https://github.com/jesec/flood/actions/workflows/build.yml)
+[![Crowdin](https://badges.crowdin.net/flood/localized.svg)](https://crowdin.com/project/flood)
+[![Discord server badge](https://img.shields.io/discord/418267176873623553.svg?style=flat-square)](https://discord.gg/Z7yR5Uf)
 
 Flood is a monitoring service for various torrent clients. It's a Node.js service that communicates with your favorite torrent client and serves a decent web UI for administration. [Flood-UI](https://github.com/Flood-UI) organization hosts related projects.
 
@@ -14,6 +16,20 @@ Flood is a monitoring service for various torrent clients. It's a Node.js servic
 | [qBittorrent](https://github.com/qbittorrent/qBittorrent) v4.1+ | :white_check_mark: ([tested](https://github.com/jesec/flood/blob/master/server/.jest/qbittorrent.setup.js))  |
 | [Transmission](https://github.com/transmission/transmission)    | :white_check_mark: ([tested](https://github.com/jesec/flood/blob/master/server/.jest/transmission.setup.js)) |
 | [Deluge](https://github.com/deluge-torrent/deluge) v2+          | :alembic: Experimental                                                                                       |
+
+##### RTorrent Notes
+
+For now, rakshasa/rtorrent and jesec/rtorrent are both supported.
+
+If you are using rakshasa/rtorrent>0.15.1 (upstream rtorrent with json-rpc support),
+you will need to add these options to your config:
+
+```ini
+method.redirect=load.throw,load.normal
+method.redirect=load.start_throw,load.start
+method.insert=d.down.sequential,value|const,0
+method.insert=d.down.sequential.set,value|const,0
+```
 
 #### Integrating with Flood
 
